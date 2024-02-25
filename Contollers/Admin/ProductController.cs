@@ -12,10 +12,15 @@ public class ProductController : Controller
 {
     private readonly ProductRepository _productRepository;
     private readonly CategoryRepository _categoryRepository;
+    private readonly ILogger<ProductController> _logger;
     public ProductController()
     {
         _productRepository = new ProductRepository();
         _categoryRepository = new CategoryRepository();
+
+        var factory = LoggerFactory.Create(builder => { builder.AddConsole(); });
+
+        _logger = factory.CreateLogger<ProductController>();
     }
 
 
@@ -53,6 +58,19 @@ public class ProductController : Controller
             return PrepareValidationView("Views/Admin/Product/ProductAdd.cshtml");
         }
 
+
+        if(model.CategoryId != null)
+        {
+            var category = _categoryRepository.GetById(model.CategoryId.Value);
+
+            if(category == null)
+            {
+                ModelState.AddModelError("CategoryId", "Category doesn't exist");
+
+                return PrepareValidationView("Views/Admin/Product/ProductAdd.cshtml");
+            }
+        }
+
         var product = new Product
         {
             Name = model.Name,
@@ -61,7 +79,19 @@ public class ProductController : Controller
             CategoryId = model.CategoryId,
         };
 
-        _productRepository.Insert(product);
+        try
+        {
+            _productRepository.Insert(product);
+        }
+        catch (PostgresException e)
+        {
+            _logger.LogError(e, "Postgresql Exception");
+
+            throw e;
+            
+        }
+
+      
 
 
         return RedirectToAction("Products");
@@ -74,11 +104,7 @@ public class ProductController : Controller
     [HttpGet("edit")]
     public IActionResult Edit(int id)
     {
-        if (!ModelState.IsValid)
-        {
-            return PrepareValidationView("Views/Admin/Product/ProductAdd.cshtml");
-        }
-
+    
         Product product = _productRepository.GetById(id);
 
         if (product == null)
@@ -110,6 +136,19 @@ public class ProductController : Controller
             return PrepareValidationView("Views/Admin/Product/ProductEdit.cshtml");
         }
 
+        if (model.CategoryId != null)
+        {
+            var category = _categoryRepository.GetById(model.CategoryId.Value);
+
+            if (category == null)
+            {
+                ModelState.AddModelError("CategoryId", "Category doesn't exist");
+
+                return PrepareValidationView("Views/Admin/Product/ProductAdd.cshtml");
+            }
+        }
+
+
 
         Product product = _productRepository.GetById(model.Id);
 
@@ -117,13 +156,27 @@ public class ProductController : Controller
         {
             return NotFound();
         }
+
+
+
         product.Name = model.Name;
         product.Price = model.Price;
         product.Rating = model.Rating;
         product.CategoryId = model.CategoryId;
 
 
-        _productRepository.Update(model);
+        try
+        {
+
+            _productRepository.Update(model);
+        }
+        catch (PostgresException e)
+        {
+            _logger.LogError(e, "Postgresql Exception");
+
+            throw e;
+
+        }
 
         return RedirectToAction("Products");
     }
