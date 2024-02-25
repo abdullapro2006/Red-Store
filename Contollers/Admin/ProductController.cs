@@ -95,7 +95,7 @@ public class ProductController : Controller
         {
             return NotFound();
         }
-
+        product.Name = model.Name;
         product.Price = model.Price;
         product.Rating = model.Rating;
         product.CategoryId = model.CategoryId;
@@ -103,7 +103,7 @@ public class ProductController : Controller
 
         _productRepository.Update(model);
 
-        return RedirectToAction("Views/Admin/Product/ProductEdit.cshtml","Products");
+        return RedirectToAction("Products");
     }
 
     #endregion
