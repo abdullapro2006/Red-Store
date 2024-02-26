@@ -1,6 +1,8 @@
-﻿namespace RedStore.Database.DomainModels;
+﻿using RedStore.Database.Abstracts;
 
-public class Category
+namespace RedStore.Database.DomainModels;
+
+public class Category : IEntity
 {
 
     public Category()

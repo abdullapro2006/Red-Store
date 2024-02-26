@@ -1,9 +1,10 @@
 ﻿using Npgsql;
+using RedStore.Database.Abstracts;
 using RedStore.Database.DomainModels;
 
 namespace RedStore.Database.Repositories;
 
-public class CategoryRepository : IDisposable
+public class CategoryRepository : BaseRepository<Category>,IDisposable
 {
     private readonly NpgsqlConnection _npgsqlConnection;
 
@@ -13,7 +14,7 @@ public class CategoryRepository : IDisposable
         _npgsqlConnection.Open();
     }
 
-    public List<Category> GetAll()
+    public override List<Category> GetAll()
     {
 
 
@@ -37,7 +38,7 @@ public class CategoryRepository : IDisposable
     }
 
 
-    public Category GetById(int id)
+    public override Category GetById(int id)
     {
 
 
@@ -66,4 +67,18 @@ public class CategoryRepository : IDisposable
         _npgsqlConnection.Dispose();
     }
 
+    public override void Insert(Category data)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void Update(Category data)
+    {
+        throw new NotImplementedException();
+    }
+
+    public override void RemoveById(int id)
+    {
+        throw new NotImplementedException();
+    }
 }

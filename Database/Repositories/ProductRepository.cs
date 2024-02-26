@@ -1,10 +1,11 @@
 ﻿using Npgsql;
+using RedStore.Database.Abstracts;
 using RedStore.Database.DomainModels;
 using RedStore.ViewModels;
 
 namespace RedStore.Database.Repositories;
 
-public class ProductRepository : IDisposable
+public class ProductRepository : BaseRepository<Product>,IDisposable
 {
 
     private readonly NpgsqlConnection _npgsqlConnection;
@@ -16,7 +17,7 @@ public class ProductRepository : IDisposable
     }
 
 
-    public List<Product> GetAll()
+    public override List<Product> GetAll()
     {
  
 
@@ -42,7 +43,7 @@ public class ProductRepository : IDisposable
         return products;
     }
 
-    public List<Product> GetAllWithCategories()
+    public  List<Product> GetAllWithCategories()
     {
 
 
@@ -73,7 +74,7 @@ public class ProductRepository : IDisposable
     }
 
 
-    public Product GetById(int id)
+    public override Product GetById(int id)
     {
 
 
@@ -98,7 +99,7 @@ public class ProductRepository : IDisposable
         return product;
     }
 
-    public void Insert(Product product)
+    public override void Insert(Product product)
     {
 
 
@@ -112,7 +113,7 @@ public class ProductRepository : IDisposable
 
     }
 
-    public void Update(ProductUpdateRequestViewModel product)
+    public override void Update(Product product)
     {
 
         var query =
@@ -129,7 +130,7 @@ public class ProductRepository : IDisposable
 
     }
 
-    public void RemoveById(int id)
+    public override void RemoveById(int id)
     {
 
         var query = $"DELETE FROM products WHERE id={id}";

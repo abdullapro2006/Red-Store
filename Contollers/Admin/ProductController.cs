@@ -168,7 +168,7 @@ public class ProductController : Controller
         try
         {
 
-            _productRepository.Update(model);
+            _productRepository.Update(product);
         }
         catch (PostgresException e)
         {
