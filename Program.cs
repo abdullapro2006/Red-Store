@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using RedStore.Services;
 
 namespace RedStore
 {
@@ -6,6 +7,10 @@ namespace RedStore
     
         public static void Main(string[] args)
         {
+            //DatabaseService databaseService = new DatabaseService();
+            //databaseService.InitializeTables();
+            //databaseService.Dispose();
+
             //boiler plate 
             var builder = WebApplication.CreateBuilder(args);
 

@@ -1,22 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using RedStore.Database;
 using RedStore.Database.DomainModels;
-using RedStore.Database.Repositories;
 using RedStore.ViewModels;
+using RedStore.ViewModels.Product;
 using System.Reflection;
 
 namespace RedStore.Contollers.Admin;
 [Route("admin/products")]
 public class ProductController : Controller
 {
-    private readonly ProductRepository _productRepository;
-    private readonly CategoryRepository _categoryRepository;
+    private readonly RedStoreDbContext _redStoreDbContext;
     private readonly ILogger<ProductController> _logger;
     public ProductController()
     {
-        _productRepository = new ProductRepository();
-        _categoryRepository = new CategoryRepository();
+        _redStoreDbContext = new RedStoreDbContext();
+     
 
         var factory = LoggerFactory.Create(builder => { builder.AddConsole(); });
 
@@ -28,7 +28,11 @@ public class ProductController : Controller
     [HttpGet]
     public IActionResult Products()
     {
-        return View("Views/Admin/Product/Products.cshtml",_productRepository.GetAllWithCategories());
+        var products = _redStoreDbContext.Products
+            .Include(p => p.Category)
+            .ToList();
+
+        return View("Views/Admin/Product/Products.cshtml",products);
     }
 
     #endregion
@@ -39,10 +43,9 @@ public class ProductController : Controller
     [HttpGet("add")]
     public IActionResult Add()
     {
-        var categories = _categoryRepository.GetAll();
         var model = new ProductAddResponseViewModel
         {
-            Categories = categories
+            Categories = _redStoreDbContext.Categories.ToList()
         };
 
         return View("Views/Admin/Product/ProductAdd.cshtml", model);
@@ -61,7 +64,7 @@ public class ProductController : Controller
 
         if(model.CategoryId != null)
         {
-            var category = _categoryRepository.GetById(model.CategoryId.Value);
+            var category = _redStoreDbContext.Categories.FirstOrDefault(c => c.Id == model.CategoryId.Value);
 
             if(category == null)
             {
@@ -81,7 +84,8 @@ public class ProductController : Controller
 
         try
         {
-            _productRepository.Insert(product);
+            _redStoreDbContext.Products.Add(product);
+            _redStoreDbContext.SaveChanges();
         }
         catch (PostgresException e)
         {
@@ -105,7 +109,7 @@ public class ProductController : Controller
     public IActionResult Edit(int id)
     {
     
-        Product product = _productRepository.GetById(id);
+        Product product = _redStoreDbContext.Products.FirstOrDefault(p => p.Id == id);  
 
         if (product == null)
         {
@@ -119,7 +123,7 @@ public class ProductController : Controller
             Name = product.Name,
             Price = product.Price,
             Rating = product.Rating,
-            Categories = _categoryRepository.GetAll(),
+            Categories = _redStoreDbContext.Categories.ToList(),
             CategoryId = product.CategoryId,
         };
 
@@ -138,7 +142,7 @@ public class ProductController : Controller
 
         if (model.CategoryId != null)
         {
-            var category = _categoryRepository.GetById(model.CategoryId.Value);
+            var category = _redStoreDbContext.Categories.FirstOrDefault(c => c.Id == model.CategoryId.Value);
 
             if (category == null)
             {
@@ -150,7 +154,7 @@ public class ProductController : Controller
 
 
 
-        Product product = _productRepository.GetById(model.Id);
+        Product product = _redStoreDbContext.Products.FirstOrDefault(p => p.Id == model.Id);
 
         if (product == null)
         {
@@ -168,7 +172,8 @@ public class ProductController : Controller
         try
         {
 
-            _productRepository.Update(product);
+            _redStoreDbContext.Products.Update(product);
+            _redStoreDbContext.SaveChanges();
         }
         catch (PostgresException e)
         {
@@ -187,12 +192,10 @@ public class ProductController : Controller
     private ViewResult PrepareValidationView(string viewName)
     {
       
-        
-            var categories = _categoryRepository.GetAll();
 
             var responseViewModel = new ProductAddResponseViewModel
             {
-                Categories = categories
+                Categories = _redStoreDbContext.Categories.ToList()
             };
 
             return View(viewName, responseViewModel);
@@ -203,13 +206,14 @@ public class ProductController : Controller
     [HttpGet("delete")]
     public IActionResult Delete(int id)
     {
-        Product product = _productRepository.GetById(id);
+        Product product = _redStoreDbContext.Products.FirstOrDefault(p => p.Id == id);
 
         if (product == null)
         {
             return NotFound();
         }
-        _productRepository.RemoveById(id);
+        _redStoreDbContext.Remove(product);
+        _redStoreDbContext.SaveChanges();
 
 
         return RedirectToAction("Products");
@@ -217,10 +221,10 @@ public class ProductController : Controller
 
     #endregion
 
+
     protected override void Dispose(bool disposing)
     {
-        _productRepository.Dispose();
-        _categoryRepository.Dispose();
+        _redStoreDbContext.Dispose();
 
         base.Dispose(disposing);
     }

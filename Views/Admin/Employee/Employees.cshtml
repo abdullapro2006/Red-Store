@@ -41,6 +41,7 @@
                             <th>Name</th>
                             <th>Surname</th>
                             <th>Fatherame</th>
+                            <th>Email</th>
                             <th class="text-end">Action</th>
                         </tr>
                     </thead>
@@ -55,10 +56,11 @@
                                 <td>@employee.Name</td>
                                 <td>@employee.Surname</td>
                                 <td>@employee.FatherName</td>
+                                <td>@employee.Email</td>
                                
                                 <td class="text-end">
                                     <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id" ><i class="las la-pen text-secondary font-16"></i></a>
-                                    <a asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.Id" ><i class="las la-trash-alt text-secondary font-16"></i></a>
+                                    <a asp-controller="Employee" asp-action="Delete" asp-route-code="@employee.Code" ><i class="las la-trash-alt text-secondary font-16"></i></a>
                                 </td>
                             </tr>
                         }

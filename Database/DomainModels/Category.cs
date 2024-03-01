@@ -1,7 +1,9 @@
 ﻿using RedStore.Database.Abstracts;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RedStore.Database.DomainModels;
 
+[Table("categories")]
 public class Category : IEntity
 {
 
@@ -15,6 +17,9 @@ public class Category : IEntity
         Name = name;
     }
 
+    [Column("id")]
     public int Id { get; set; }
+
+    [Column("name")]
     public string Name { get; set; }
 }

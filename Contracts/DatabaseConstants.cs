@@ -1,4 +1,4 @@
-﻿namespace RedStore;
+﻿namespace RedStore.Contracts;
 
 public class DatabaseConstants
 {

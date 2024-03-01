@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace RedStore.ViewModels;
+namespace RedStore.ViewModels.Product;
 
 public abstract class BaseProductViewModel
 {
-    [Required(ErrorMessage = ("Pls enter name"))]
+    [Required(ErrorMessage = "Pls enter name")]
     public string Name { get; set; }
 
     [Range(1, 1000)]

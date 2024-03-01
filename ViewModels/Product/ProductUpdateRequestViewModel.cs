@@ -1,4 +1,4 @@
-﻿namespace RedStore.ViewModels;
+﻿namespace RedStore.ViewModels.Product;
 
 public class ProductUpdateRequestViewModel : BaseProductViewModel
 {

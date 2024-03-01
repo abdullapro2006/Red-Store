@@ -1,21 +1,21 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using RedStore.Database;
-using RedStore.Database.Repositories;
 
 namespace RedStore.Contollers.Client;
 
 public class HomeController : Controller
 {
-    private readonly ProductRepository _productRepository;
+    private readonly RedStoreDbContext _dbContext;
 
     public HomeController()
     {
-        _productRepository = new ProductRepository();
+        _dbContext = new RedStoreDbContext();
     }
 
     public ViewResult Index()
     {
-        return View(_productRepository.GetAll());
+        return View(_dbContext.Products.ToList());
     }
     public ViewResult About()
     {
@@ -24,7 +24,7 @@ public class HomeController : Controller
 
     protected override void Dispose(bool disposing)
     {
-        _productRepository.Dispose();
+        _dbContext.Dispose();
 
         base.Dispose(disposing);
     }

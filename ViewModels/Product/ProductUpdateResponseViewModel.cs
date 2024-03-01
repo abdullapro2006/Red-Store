@@ -1,6 +1,6 @@
 ﻿using RedStore.Database.DomainModels;
 
-namespace RedStore.ViewModels;
+namespace RedStore.ViewModels.Product;
 
 public class ProductUpdateResponseViewModel : BaseProductViewModel
 {
