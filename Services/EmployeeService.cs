@@ -6,9 +6,9 @@ public class EmployeeService : IDisposable
 {
     private readonly RedStoreDbContext _redStoreDbContext;
 
-    public EmployeeService()
+    public EmployeeService(RedStoreDbContext redStoreDbContext)
     {
-        _redStoreDbContext = new RedStoreDbContext();
+        _redStoreDbContext = redStoreDbContext;
     }
 
 

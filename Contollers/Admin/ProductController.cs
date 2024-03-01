@@ -13,14 +13,12 @@ public class ProductController : Controller
 {
     private readonly RedStoreDbContext _redStoreDbContext;
     private readonly ILogger<ProductController> _logger;
-    public ProductController()
+    public ProductController(RedStoreDbContext redStoreDbContext,
+        ILogger<ProductController> logger)
     {
-        _redStoreDbContext = new RedStoreDbContext();
-     
+        _redStoreDbContext = redStoreDbContext;
 
-        var factory = LoggerFactory.Create(builder => { builder.AddConsole(); });
-
-        _logger = factory.CreateLogger<ProductController>();
+        _logger = logger;
     }
 
 

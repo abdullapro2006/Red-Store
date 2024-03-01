@@ -14,18 +14,18 @@ namespace RedStore.Contollers.Admin;
 public class EmployeeController : Controller
 {
     private readonly RedStoreDbContext _dbContext;
-    private readonly ILogger<ProductController> _logger;
+    private readonly ILogger<EmployeeController> _logger;
     private readonly EmployeeService _employeeService;
-    public EmployeeController()
+    public EmployeeController(RedStoreDbContext redStoreDbContext, 
+        EmployeeService employeeService,
+        ILogger<EmployeeController> logger)
     {
-        _dbContext = new RedStoreDbContext();
+        _dbContext = redStoreDbContext;
         
-        _employeeService = new EmployeeService();
+        _employeeService = employeeService;
+        _logger = logger;
 
 
-        var factory = LoggerFactory.Create(builder => { builder.AddConsole(); });
-
-        _logger = factory.CreateLogger<ProductController>();
     }
 
 

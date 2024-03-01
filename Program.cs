@@ -1,4 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RedStore.Contracts;
+using RedStore.Database;
 using RedStore.Services;
 
 namespace RedStore
@@ -17,6 +20,13 @@ namespace RedStore
             builder.Services.
                 AddControllersWithViews()
                 .AddRazorRuntimeCompilation();
+
+            builder.Services
+                .AddScoped<EmployeeService>()
+                .AddDbContext<RedStoreDbContext>(o =>
+                {
+                    o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);
+                });
 
             var app = builder.Build();
 

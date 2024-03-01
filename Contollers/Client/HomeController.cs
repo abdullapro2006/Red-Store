@@ -8,9 +8,9 @@ public class HomeController : Controller
 {
     private readonly RedStoreDbContext _dbContext;
 
-    public HomeController()
+    public HomeController(RedStoreDbContext redStoreDbContext)
     {
-        _dbContext = new RedStoreDbContext();
+        _dbContext = redStoreDbContext;
     }
 
     public ViewResult Index()
