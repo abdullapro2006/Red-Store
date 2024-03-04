@@ -3,7 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using RedStore.Database;
 using RedStore.Database.DomainModels;
-using RedStore.Services;
+using RedStore.Services.Abstract;
+using RedStore.Services.Concretes;
 using RedStore.ViewModels;
 using RedStore.ViewModels.Employee;
 using RedStore.ViewModels.Product;
@@ -15,17 +16,16 @@ public class EmployeeController : Controller
 {
     private readonly RedStoreDbContext _dbContext;
     private readonly ILogger<EmployeeController> _logger;
-    private readonly EmployeeService _employeeService;
-    public EmployeeController(RedStoreDbContext redStoreDbContext, 
-        EmployeeService employeeService,
+    private readonly IEmployeeService _employeeService;
+    public EmployeeController(
+        RedStoreDbContext redStoreDbContext,
+        IEmployeeService employeeService,
         ILogger<EmployeeController> logger)
     {
         _dbContext = redStoreDbContext;
-        
+
         _employeeService = employeeService;
         _logger = logger;
-
-
     }
 
 
@@ -155,12 +155,5 @@ public class EmployeeController : Controller
 
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        _dbContext.Dispose();
-        _employeeService.Dispose();
-
-        base.Dispose(disposing);
-    }
 
 }

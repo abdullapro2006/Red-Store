@@ -1,12 +1,13 @@
 ﻿using RedStore.Database;
+using RedStore.Services.Abstract;
 
-namespace RedStore.Services;
+namespace RedStore.Services.Concretes;
 
-public class EmployeeService : IDisposable
+public class EmployeeServiceImp : IEmployeeService,IDisposable
 {
     private readonly RedStoreDbContext _redStoreDbContext;
 
-    public EmployeeService(RedStoreDbContext redStoreDbContext)
+    public EmployeeServiceImp(RedStoreDbContext redStoreDbContext)
     {
         _redStoreDbContext = redStoreDbContext;
     }
@@ -35,6 +36,6 @@ public class EmployeeService : IDisposable
 
     public void Dispose()
     {
-       _redStoreDbContext.Dispose();
+        _redStoreDbContext.Dispose();
     }
 }

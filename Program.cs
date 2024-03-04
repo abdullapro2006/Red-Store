@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RedStore.Contracts;
 using RedStore.Database;
-using RedStore.Services;
+using RedStore.Services.Abstract;
+using RedStore.Services.Concretes;
 
 namespace RedStore
 {
@@ -22,7 +23,7 @@ namespace RedStore
                 .AddRazorRuntimeCompilation();
 
             builder.Services
-                .AddScoped<EmployeeService>()
+                .AddScoped<IEmployeeService,EmployeeServiceImp>()
                 .AddDbContext<RedStoreDbContext>(o =>
                 {
                     o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);

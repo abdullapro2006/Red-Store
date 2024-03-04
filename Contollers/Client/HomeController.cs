@@ -22,10 +22,4 @@ public class HomeController : Controller
         return View();
     }
 
-    protected override void Dispose(bool disposing)
-    {
-        _dbContext.Dispose();
-
-        base.Dispose(disposing);
-    }
 }

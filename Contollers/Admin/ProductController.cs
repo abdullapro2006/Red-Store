@@ -220,12 +220,6 @@ public class ProductController : Controller
     #endregion
 
 
-    protected override void Dispose(bool disposing)
-    {
-        _redStoreDbContext.Dispose();
-
-        base.Dispose(disposing);
-    }
 
 }
 
