@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RedStore.Database;
@@ -11,9 +12,10 @@ using RedStore.Database;
 namespace RedStore.Migrations
 {
     [DbContext(typeof(RedStoreDbContext))]
-    partial class RedStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305093435_Colors")]
+    partial class Colors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,28 +56,6 @@ namespace RedStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -1,
-                            Name = "Red"
-                        },
-                        new
-                        {
-                            Id = -2,
-                            Name = "Green"
-                        },
-                        new
-                        {
-                            Id = -3,
-                            Name = "Blue"
-                        },
-                        new
-                        {
-                            Id = -4,
-                            Name = "Black"
-                        });
                 });
 
             modelBuilder.Entity("RedStore.Database.DomainModels.Product", b =>
@@ -110,21 +90,6 @@ namespace RedStore.Migrations
                     b.ToTable("products", null, t => t.ExcludeFromMigrations());
                 });
 
-            modelBuilder.Entity("RedStore.Database.DomainModels.ProductColor", b =>
-                {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("ColorId")
-                        .HasColumnType("integer");
-
-                    b.HasKey("ProductId", "ColorId");
-
-                    b.HasIndex("ColorId");
-
-                    b.ToTable("ProductColors", (string)null);
-                });
-
             modelBuilder.Entity("RedStore.Database.DomainModels.Product", b =>
                 {
                     b.HasOne("RedStore.Database.DomainModels.Category", "Category")
@@ -132,25 +97,6 @@ namespace RedStore.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("RedStore.Database.DomainModels.ProductColor", b =>
-                {
-                    b.HasOne("RedStore.Database.DomainModels.Color", "Color")
-                        .WithMany()
-                        .HasForeignKey("ColorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("RedStore.Database.DomainModels.Product", "Product")
-                        .WithMany()
-                        .HasForeignKey("ProductId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Color");
-
-                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

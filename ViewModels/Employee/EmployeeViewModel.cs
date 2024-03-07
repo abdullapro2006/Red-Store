@@ -1,5 +1,4 @@
-﻿using RedStore.Database.DomainModels;
-using System.ComponentModel.DataAnnotations.Schema;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace RedStore.ViewModels.Employee;
 
@@ -15,5 +14,4 @@ public class EmployeeViewModel
     public string Pin { get; set; }
     public string Email { get; set; }
     public int DeparmentId { get; set; }
-    public List<Department> Departments { get; set; }
 }

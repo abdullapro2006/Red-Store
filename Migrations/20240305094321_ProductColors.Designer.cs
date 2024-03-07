@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RedStore.Database;
@@ -11,9 +12,10 @@ using RedStore.Database;
 namespace RedStore.Migrations
 {
     [DbContext(typeof(RedStoreDbContext))]
-    partial class RedStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240305094321_ProductColors")]
+    partial class ProductColors
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -54,28 +56,6 @@ namespace RedStore.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Colors");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = -1,
-                            Name = "Red"
-                        },
-                        new
-                        {
-                            Id = -2,
-                            Name = "Green"
-                        },
-                        new
-                        {
-                            Id = -3,
-                            Name = "Blue"
-                        },
-                        new
-                        {
-                            Id = -4,
-                            Name = "Black"
-                        });
                 });
 
             modelBuilder.Entity("RedStore.Database.DomainModels.Product", b =>
@@ -122,7 +102,7 @@ namespace RedStore.Migrations
 
                     b.HasIndex("ColorId");
 
-                    b.ToTable("ProductColors", (string)null);
+                    b.ToTable("ProductColor");
                 });
 
             modelBuilder.Entity("RedStore.Database.DomainModels.Product", b =>

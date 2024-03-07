@@ -36,4 +36,7 @@ public class Product : IEntity
 
     public Category Category { get; set; }
 
+
+    public List<ProductColor> ProductColors { get; set; }
+
 }

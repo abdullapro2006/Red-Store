@@ -28,6 +28,8 @@ public class ProductController : Controller
     {
         var products = _redStoreDbContext.Products
             .Include(p => p.Category)
+            .Include(p => p.ProductColors)
+            .ThenInclude(pc => pc.Color)
             .ToList();
 
         return View("Views/Admin/Product/Products.cshtml",products);
@@ -43,7 +45,8 @@ public class ProductController : Controller
     {
         var model = new ProductAddResponseViewModel
         {
-            Categories = _redStoreDbContext.Categories.ToList()
+            Categories = _redStoreDbContext.Categories.ToList(),
+            Colors = _redStoreDbContext.Colors.ToList(),
         };
 
         return View("Views/Admin/Product/ProductAdd.cshtml", model);
@@ -72,28 +75,39 @@ public class ProductController : Controller
             }
         }
 
-        var product = new Product
-        {
-            Name = model.Name,
-            Price = model.Price,
-            Rating = model.Rating,
-            CategoryId = model.CategoryId,
-        };
-
         try
         {
+            var product = new Product
+            {
+                Name = model.Name,
+                Price = model.Price,
+                Rating = model.Rating,
+                CategoryId = model.CategoryId,
+            };
             _redStoreDbContext.Products.Add(product);
             _redStoreDbContext.SaveChanges();
+
+            foreach (var colorId in model.SelectedColorIds)
+            {
+                var productColor = new ProductColor
+                {
+                    ColorId = colorId,
+                    ProductId = product.Id,
+                };
+                _redStoreDbContext.ProductColors.Add(productColor);
+                _redStoreDbContext.SaveChanges();
+            }
+
+
+           
         }
         catch (PostgresException e)
         {
-            _logger.LogError(e, "Postgresql Exception");
 
-            throw e;
-            
         }
+        
 
-      
+
 
 
         return RedirectToAction("Products");
@@ -107,7 +121,9 @@ public class ProductController : Controller
     public IActionResult Edit(int id)
     {
     
-        Product product = _redStoreDbContext.Products.FirstOrDefault(p => p.Id == id);  
+        Product product = _redStoreDbContext.Products
+            .Include(p => p.ProductColors)
+            .FirstOrDefault(p => p.Id == id);  
 
         if (product == null)
         {
@@ -123,6 +139,8 @@ public class ProductController : Controller
             Rating = product.Rating,
             Categories = _redStoreDbContext.Categories.ToList(),
             CategoryId = product.CategoryId,
+            SelectedColorIds = product.ProductColors.Select(pc => pc.ColorId).ToArray(),
+            Colors = _redStoreDbContext.Colors.ToList()
         };
 
         return View("Views/Admin/Product/ProductEdit.cshtml", model);
@@ -152,7 +170,9 @@ public class ProductController : Controller
 
 
 
-        Product product = _redStoreDbContext.Products.FirstOrDefault(p => p.Id == model.Id);
+        Product product = _redStoreDbContext.Products
+            .Include(pc => pc.ProductColors)
+            .FirstOrDefault(p => p.Id == model.Id);
 
         if (product == null)
         {
@@ -161,17 +181,34 @@ public class ProductController : Controller
 
 
 
-        product.Name = model.Name;
-        product.Price = model.Price;
-        product.Rating = model.Rating;
-        product.CategoryId = model.CategoryId;
-
 
         try
         {
+            product.ProductColors.Clear();
+            _redStoreDbContext.SaveChanges();
+
+            product.Name = model.Name;
+            product.Price = model.Price;
+            product.Rating = model.Rating;
+            product.CategoryId = model.CategoryId;
+
 
             _redStoreDbContext.Products.Update(product);
             _redStoreDbContext.SaveChanges();
+
+            foreach (var colorId in model.SelectedColorIds)
+            {
+                var productColor = new ProductColor
+                {
+                    ColorId = colorId,
+                    ProductId = product.Id,
+                };
+                _redStoreDbContext.ProductColors.Add(productColor);
+                _redStoreDbContext.SaveChanges();
+            }
+
+
+
         }
         catch (PostgresException e)
         {
@@ -204,7 +241,8 @@ public class ProductController : Controller
     [HttpGet("delete")]
     public IActionResult Delete(int id)
     {
-        Product product = _redStoreDbContext.Products.FirstOrDefault(p => p.Id == id);
+        Product product = _redStoreDbContext.Products
+            .FirstOrDefault(p => p.Id == id);
 
         if (product == null)
         {

@@ -1,4 +1,4 @@
-﻿@model List<Employee>
+﻿@model List<Color>
 @{
     Layout = "_AdminLayout";
 }
@@ -30,38 +30,25 @@
                     within the <code>&lt;tbody&gt;</code>.
                 </p>
             </div>
-            <a asp-controller="Employee" asp-action="Add" class="btn btn-success">Add employee</a>
+            <a asp-controller="Product" asp-action="Add" class="btn btn-success">Add product</a>
         </div><!--end card-header-->
         <div class="card-body">
             <div class="table-responsive">
                 <table class="table table-striped mb-0">
                     <thead>
                         <tr>
-                            <th>Code</th>
                             <th>Name</th>
-                            <th>Surname</th>
-                            <th>Fatherame</th>
-                            <th>Email</th>
                             <th class="text-end">Action</th>
                         </tr>
                     </thead>
                     <tbody>
 
 
-                        @foreach (var employee in Model)
+                        @foreach (var color in Model)
                         {
                             <tr>
-                                <td>@* <img src="assets/images/users/user-3.jpg" alt="" class="rounded-circle thumb-xs me-1">  *@
-                                    @employee.Code</td>
-                                <td>@employee.Name</td>
-                                <td>@employee.Surname</td>
-                                <td>@employee.FatherName</td>
-                                <td>@employee.Email</td>
-                               
-                                <td class="text-end">
-                                    <a asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.Id" ><i class="las la-pen text-secondary font-16"></i></a>
-                                    <a asp-controller="Employee" asp-action="Delete" asp-route-code="@employee.Code" ><i class="las la-trash-alt text-secondary font-16"></i></a>
-                                </td>
+                           
+                              <td>@color.Name</td>
                             </tr>
                         }
                       

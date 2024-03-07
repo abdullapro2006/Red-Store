@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using RedStore.Database.DomainModels;
+using System.ComponentModel.DataAnnotations;
 
 namespace RedStore.ViewModels.Product;
 
@@ -13,4 +14,6 @@ public abstract class BaseProductViewModel
     [Range(1, 5)]
     public int Rating { get; set; }
     public int? CategoryId { get; set; }
+    public int[] SelectedColorIds { get; set; }
+    public List<Color> Colors { get; set; }
 }

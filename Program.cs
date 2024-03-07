@@ -1,14 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RedStore.Contracts;
 using RedStore.Database;
-using RedStore.Services.Abstract;
-using RedStore.Services.Concretes;
-
 namespace RedStore
 {
-    public class Program {
-    
+    public class Program
+    {
+
         public static void Main(string[] args)
         {
             //DatabaseService databaseService = new DatabaseService();
@@ -23,7 +20,6 @@ namespace RedStore
                 .AddRazorRuntimeCompilation();
 
             builder.Services
-                .AddScoped<IEmployeeService,EmployeeServiceImp>()
                 .AddDbContext<RedStoreDbContext>(o =>
                 {
                     o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);
@@ -33,7 +29,7 @@ namespace RedStore
 
             app.UseStaticFiles();
 
-            app.MapControllerRoute("default", "{controller}/{action}");
+            app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 
             app.Run();
 
