@@ -85,25 +85,35 @@ public class ProductController : Controller
                 CategoryId = model.CategoryId,
             };
             _redStoreDbContext.Products.Add(product);
-            _redStoreDbContext.SaveChanges();
 
             foreach (var colorId in model.SelectedColorIds)
             {
+                var color = _redStoreDbContext.Colors.FirstOrDefault(c => c.Id == colorId);
+
+                if (color == null)
+                {
+                    ModelState.AddModelError("SelectedColorIds", "Color doesn't exist");
+
+                    return PrepareValidationView("Views/Admin/Product/ProductAdd.cshtml");
+                }
+
                 var productColor = new ProductColor
                 {
                     ColorId = colorId,
-                    ProductId = product.Id,
+                    Product = product
                 };
+
+
                 _redStoreDbContext.ProductColors.Add(productColor);
-                _redStoreDbContext.SaveChanges();
             }
 
+            _redStoreDbContext.SaveChanges();
 
            
         }
         catch (PostgresException e)
         {
-
+            _logger.LogError(e, "PostgreSql Exception");
         }
         
 
@@ -179,36 +189,39 @@ public class ProductController : Controller
             return NotFound();
         }
 
+        var productColorIdsInDb = product.ProductColors.Select(pc => pc.ColorId);
 
+
+
+        var removableIds = productColorIdsInDb
+            .Where(id => !model.SelectedColorIds.Contains(id))
+            .ToList();
+
+        product.ProductColors.RemoveAll(pc => removableIds.Contains(pc.ColorId));
+
+        var addableIds = model.SelectedColorIds
+            .Where(id => !productColorIdsInDb.Contains(id))
+            .ToList();
+
+
+        var newProductColors = addableIds.Select(colorId => new ProductColor
+        {
+            ColorId = colorId,
+            Product = product
+        });
+
+        product.ProductColors.AddRange(newProductColors);
 
 
         try
         {
-            product.ProductColors.Clear();
-            _redStoreDbContext.SaveChanges();
 
             product.Name = model.Name;
             product.Price = model.Price;
             product.Rating = model.Rating;
             product.CategoryId = model.CategoryId;
 
-
-            _redStoreDbContext.Products.Update(product);
             _redStoreDbContext.SaveChanges();
-
-            foreach (var colorId in model.SelectedColorIds)
-            {
-                var productColor = new ProductColor
-                {
-                    ColorId = colorId,
-                    ProductId = product.Id,
-                };
-                _redStoreDbContext.ProductColors.Add(productColor);
-                _redStoreDbContext.SaveChanges();
-            }
-
-
-
         }
         catch (PostgresException e)
         {
@@ -230,7 +243,8 @@ public class ProductController : Controller
 
             var responseViewModel = new ProductAddResponseViewModel
             {
-                Categories = _redStoreDbContext.Categories.ToList()
+                Categories = _redStoreDbContext.Categories.ToList(),
+                Colors = _redStoreDbContext.Colors.ToList(),
             };
 
             return View(viewName, responseViewModel);
