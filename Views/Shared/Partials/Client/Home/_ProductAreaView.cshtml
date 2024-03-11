@@ -1,0 +1,40 @@
+﻿  <!--------- featured categories --------->
+
+<div class="categories">
+    <div class="small-container">
+        <div class="row">
+            <div class="col-3">
+                <img src="~/client/assets/images/category-1.jpg">
+            </div>
+            <div class="col-3">
+                <img src="~/client/assets/images/category-2.jpg">
+            </div>
+            <div class="col-3">
+                <img src="~/client/assets/images/category-3.jpg">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--------- featured products --------->
+
+<div class="small-container">
+    <h2 class="title">Featured Products</h2>
+    <div class="row">
+        @foreach (var product in Model)
+        {
+            <div class="col-4">
+                <a asp-controller="Product" asp-action="SingleProduct"><img src="~/client/assets/images/product-1.jpg"></a>
+                <a asp-controller="Product" asp-action="SingleProduct"><h4>@product.Name</h4></a>
+                <div class="rating">
+                    @for (int i = 0; i < product.Rating; i++)
+                    {
+                        <i class="fa fa-star"></i>
+                    }
+                </div>
+                <p>$@product.Price</p>
+            </div>
+
+        }
+    </div>
