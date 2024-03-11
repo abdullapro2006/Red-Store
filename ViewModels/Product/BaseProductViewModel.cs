@@ -16,4 +16,6 @@ public abstract class BaseProductViewModel
     public int? CategoryId { get; set; }
     public int[] SelectedColorIds { get; set; }
     public List<Color> Colors { get; set; }
+    public int[] SelectedSizeIds { get; set; }
+    public List<Size> Sizes { get; set; }
 }

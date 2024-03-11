@@ -38,5 +38,7 @@ public class Product : IEntity
 
 
     public List<ProductColor> ProductColors { get; set; }
+    public List<ProductSize> ProductSizes { get; set; }
+
 
 }

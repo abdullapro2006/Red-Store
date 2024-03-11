@@ -30,6 +30,8 @@ public class ProductController : Controller
             .Include(p => p.Category)
             .Include(p => p.ProductColors)
             .ThenInclude(pc => pc.Color)
+            .Include(p => p.ProductSizes)
+            .ThenInclude(ps  => ps.Size)
             .ToList();
 
         return View("Views/Admin/Product/Products.cshtml",products);
@@ -47,6 +49,7 @@ public class ProductController : Controller
         {
             Categories = _redStoreDbContext.Categories.ToList(),
             Colors = _redStoreDbContext.Colors.ToList(),
+            Sizes = _redStoreDbContext.Sizes.ToList(),
         };
 
         return View("Views/Admin/Product/ProductAdd.cshtml", model);
@@ -107,6 +110,27 @@ public class ProductController : Controller
                 _redStoreDbContext.ProductColors.Add(productColor);
             }
 
+            foreach (var sizeId in model.SelectedSizeIds)
+            {
+                var size = _redStoreDbContext.Colors.FirstOrDefault(c => c.Id == sizeId);
+
+                if (size == null)
+                {
+                    ModelState.AddModelError("SelectedSizeIds", "Size doesn't exist");
+
+                    return PrepareValidationView("Views/Admin/Product/ProductAdd.cshtml");
+                }
+
+                var productSize = new ProductSize
+                {
+                    SizeId = sizeId,
+                    Product = product
+                };
+
+
+                _redStoreDbContext.ProductSizes.Add(productSize);
+            }
+
             _redStoreDbContext.SaveChanges();
 
            
@@ -133,6 +157,7 @@ public class ProductController : Controller
     
         Product product = _redStoreDbContext.Products
             .Include(p => p.ProductColors)
+            .Include(p => p.ProductSizes)
             .FirstOrDefault(p => p.Id == id);  
 
         if (product == null)
@@ -150,7 +175,9 @@ public class ProductController : Controller
             Categories = _redStoreDbContext.Categories.ToList(),
             CategoryId = product.CategoryId,
             SelectedColorIds = product.ProductColors.Select(pc => pc.ColorId).ToArray(),
-            Colors = _redStoreDbContext.Colors.ToList()
+            Colors = _redStoreDbContext.Colors.ToList(),
+            SelectedSizeIds = product.ProductSizes.Select(pc => pc.SizeId).ToArray(),
+            Sizes = _redStoreDbContext.Sizes.ToList()
         };
 
         return View("Views/Admin/Product/ProductEdit.cshtml", model);
@@ -182,6 +209,7 @@ public class ProductController : Controller
 
         Product product = _redStoreDbContext.Products
             .Include(pc => pc.ProductColors)
+            .Include(ps => ps.ProductSizes)
             .FirstOrDefault(p => p.Id == model.Id);
 
         if (product == null)
@@ -189,6 +217,7 @@ public class ProductController : Controller
             return NotFound();
         }
 
+        #region ProductColor
         var productColorIdsInDb = product.ProductColors.Select(pc => pc.ColorId);
 
 
@@ -211,6 +240,34 @@ public class ProductController : Controller
         });
 
         product.ProductColors.AddRange(newProductColors);
+
+        #endregion
+
+        #region ProductSize
+        var productSizeIdsInDb = product.ProductSizes.Select(pc => pc.SizeId);
+
+
+
+        var removableSizeIds = productSizeIdsInDb
+            .Where(id => !model.SelectedSizeIds.Contains(id))
+            .ToList();
+
+        product.ProductSizes.RemoveAll(pc => removableSizeIds.Contains(pc.SizeId));
+
+        var addableSizeIds = model.SelectedSizeIds
+            .Where(id => !productSizeIdsInDb.Contains(id))
+            .ToList();
+
+
+        var newProductSizes = addableSizeIds.Select(sizeId => new ProductSize
+        {
+            SizeId = sizeId,
+            Product = product
+        });
+
+        product.ProductSizes.AddRange(newProductSizes);
+
+        #endregion
 
 
         try
@@ -245,6 +302,7 @@ public class ProductController : Controller
             {
                 Categories = _redStoreDbContext.Categories.ToList(),
                 Colors = _redStoreDbContext.Colors.ToList(),
+                Sizes = _redStoreDbContext.Sizes.ToList(),
             };
 
             return View(viewName, responseViewModel);
