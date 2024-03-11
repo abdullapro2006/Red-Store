@@ -1,68 +1,56 @@
-﻿@{
+﻿
+@model Product
+@{
     Layout = "_ClientLayout";
 }
 
 
-    <div class="container">
-        <div class="navbar">
-            <div class="logo">
-                <img src="assets/images/logo.png" alt="" width="125px">
-            </div>
-            <nav>
-                <ul id="MenuItems">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="products.html">Products</a></li>
-                    <li><a href="">About</a></li>
-                    <li><a href="">Contact</a></li>
-                    <li><a href="account.html">Account</a></li>
-                </ul>
-            </nav>
-            <img src="assets/images/cart.png" width="30px" height="30px">
-            <img src="assets/images/menu.png" class="menu-icon" onclick="menutoggle()">
-        </div>
-
-    </div>
+ 
 
     <!--------- single-products details --------->
 
     <div class="small-container single-product">
         <div class="row">
             <div class="col-2">
-                <img src="assets/images/gallery-1.jpg" width="100%" id="ProductImg">
+                <img src="~/client/assets/images/gallery-1.jpg" width="100%" id="ProductImg">
 
                 <div class="small-img-row">
                     <div class="small-img-col">
-                        <img src="assets/images/gallery-1.jpg" width="100%" class="small-img">
+                        <img src="~/client/assets/images/gallery-1.jpg" width="100%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="assets/images/gallery-2.jpg" width="100%" class="small-img">
+                        <img src="~/client/assets/images/gallery-2.jpg" width="100%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="assets/images/gallery-3.jpg" width="100%" class="small-img">
+                        <img src="~/client/assets/images/gallery-3.jpg" width="100%" class="small-img">
                     </div>
                     <div class="small-img-col">
-                        <img src="assets/images/gallery-4.jpg" width="100%" class="small-img">
+                        <img src="~/client/assets/images/gallery-4.jpg" width="100%" class="small-img">
                     </div>
                 </div>
 
             </div>
             <div class="col-2">
                 <p> Home / T-Shirt</p>
-                <h1>Red Print T-Shirt by HRX</h1>
-                <h4>$50.00</h4>
+                <h1>@Model.Name</h1>
+                <h4>$@Model.Price</h4>
                 <select>
-                    <option>Select Size</option>
-                    <option>XXL</option>
-                    <option>XL</option>
-                    <option>M</option>
-                    <option>L</option>
-                    <option>S</option>
+                <option>Select Size</option>
+                    @foreach (var size in Model.ProductSizes.Select(ps => ps.Size))
+                {
+                    <option value="@size.Id">@size.Name</option>
+                }
+                  
+                 
+                 
                 </select>
                 <select>
                     <option>Select Color</option>
-                    <option>Green</option>
-                    <option>Yellow</option>
-                    <option>Black</option>
+                @foreach (var color in Model.ProductColors.Select(pc => pc.Color))
+                {
+                    <option value="@color.Id">@color.Name</option>
+                }
+                    
                 </select>
                 <input type="number" value="1">
                 <a href="" class="btn">Add Card</a>
@@ -94,7 +82,7 @@
 
         <div class="row">
             <div class="col-4">
-                <img src="assets/images/product-9.jpg">
+                <img src="~/client/assets/images/product-9.jpg">
                 <h4>Red Printed T-Shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
@@ -106,7 +94,7 @@
                 <p>$50.00</p>
             </div>
             <div class="col-4">
-                <img src="assets/images/product-10.jpg">
+                <img src="~/client/assets/images/product-10.jpg">
                 <h4>Red Printed T-Shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
@@ -118,7 +106,7 @@
                 <p>$50.00</p>
             </div>
             <div class="col-4">
-                <img src="assets/images/product-11.jpg">
+                <img src="~/client/assets/images/product-11.jpg">
                 <h4>Red Printed T-Shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
@@ -130,7 +118,7 @@
                 <p>$50.00</p>
             </div>
             <div class="col-4">
-                <img src="assets/images/product-12.jpg">
+                <img src="~/client/assets/images/product-12.jpg">
                 <h4>Red Printed T-Shirt</h4>
                 <div class="rating">
                     <i class="fa fa-star"></i>
