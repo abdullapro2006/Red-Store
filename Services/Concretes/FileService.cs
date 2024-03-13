@@ -22,7 +22,11 @@ public class FileService : IFileService
     {
         var uniqueFileName = GetUniqueFileName(file.FileName);
         var uploadPath = uploadDir.GetAbsolutePath(uniqueFileName);
+
+
         using FileStream fileStream = new FileStream(uploadPath, FileMode.Create);
+
+
         file.CopyTo(fileStream);
 
         return uniqueFileName;

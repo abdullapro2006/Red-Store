@@ -23,7 +23,10 @@ namespace RedStore
                 .AddRazorRuntimeCompilation();
 
             builder.Services
-                .AddScoped<IFileService,FileService>()
+                .AddSingleton<IFileService,FileService>()
+                 .AddScoped<IUserService, UserService>()
+                 .AddScoped<IProductService, ProductService>()
+                 .AddScoped<IBasketService, BasketService>()
                 .AddDbContext<RedStoreDbContext>(o =>
                 {
                     o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);

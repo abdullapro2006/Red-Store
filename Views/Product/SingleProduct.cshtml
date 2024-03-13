@@ -52,7 +52,8 @@
                     
                 </select>
                 <input type="number" value="1">
-                <a href="" class="btn">Add Card</a>
+                <a asp-controller="basket" asp-action="AddProduct" asp-route-productId="@Model.Id" class="btn">
+                Add Card</a>
                 <h3>Product Details <i class="fa fa-indent"></i></h3>
                 <br>
                 <p>
