@@ -22,9 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="images\" />
-    <Folder Include="Services\Abstract\" />
-    <Folder Include="Services\Concretes\" />
     <Folder Include="wwwroot\custom-images\products\" />
   </ItemGroup>
 

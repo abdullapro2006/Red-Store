@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using RedStore.Contracts;
 using RedStore.Database;
 using RedStore.Database.DomainModels;
+using RedStore.Services.Abstract;
 using RedStore.ViewModels;
 using RedStore.ViewModels.Product;
 using System.Reflection;
@@ -13,6 +15,7 @@ public class ProductController : Controller
 {
     private readonly RedStoreDbContext _redStoreDbContext;
     private readonly ILogger<ProductController> _logger;
+    private readonly IFileService _fileService;
     public ProductController(RedStoreDbContext redStoreDbContext,
         ILogger<ProductController> logger)
     {
@@ -131,12 +134,7 @@ public class ProductController : Controller
                 _redStoreDbContext.ProductSizes.Add(productSize);
             }
 
-            string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(model.Image.FileName)}";
-
-            string absolutePath = @$"C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\wwwroot\custom-images\products\{uniqueFileName}";
-            using FileStream fileStream = new FileStream(absolutePath,FileMode.Create);
-            model.Image.CopyTo(fileStream);
-
+            string uniqueFileName = _fileService.Upload(model.Image, UploadDirectory.Products);
             product.ImageName = model.Image.FileName;
             product.ImageNameInFileSytem = uniqueFileName;
 
@@ -283,20 +281,11 @@ public class ProductController : Controller
 
         if(model.Image != null)
         {
-            string oldImageAbsolutePath = @$"C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\wwwroot\custom-images\products\{product.ImageNameInFileSytem}";
-
-            System.IO.File.Delete(oldImageAbsolutePath);
-
-            string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(model.Image.FileName)}";
-
-            string newImageAbsolutePath = @$"C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\wwwroot\custom-images\products\{uniqueFileName}";
-            using FileStream fileStream = new FileStream(newImageAbsolutePath, FileMode.Create);
-            model.Image.CopyTo(fileStream);
-
+            _fileService.Delete(UploadDirectory.Products, product.ImageNameInFileSytem);
 
 
             product.ImageName = model.Image.FileName;
-            product.ImageNameInFileSytem = uniqueFileName;
+            product.ImageNameInFileSytem = _fileService.Upload(model.Image, UploadDirectory.Products);
         }
 
        
@@ -328,20 +317,7 @@ public class ProductController : Controller
     #endregion
 
 
-    private ViewResult PrepareValidationView(string viewName)
-    {
-      
-
-            var responseViewModel = new ProductAddResponseViewModel
-            {
-                Categories = _redStoreDbContext.Categories.ToList(),
-                Colors = _redStoreDbContext.Colors.ToList(),
-                Sizes = _redStoreDbContext.Sizes.ToList(),
-            };
-
-            return View(viewName, responseViewModel);
-        
-    }
+   
 
     #region Delete
     [HttpGet("delete")]
@@ -357,13 +333,28 @@ public class ProductController : Controller
         _redStoreDbContext.Remove(product);
         _redStoreDbContext.SaveChanges();
 
+        _fileService
+            .Delete(UploadDirectory.Products, product.ImageNameInFileSytem);
 
         return RedirectToAction("Products");
     }
 
     #endregion
 
+    private ViewResult PrepareValidationView(string viewName)
+    {
 
+
+        var responseViewModel = new ProductAddResponseViewModel
+        {
+            Categories = _redStoreDbContext.Categories.ToList(),
+            Colors = _redStoreDbContext.Colors.ToList(),
+            Sizes = _redStoreDbContext.Sizes.ToList(),
+        };
+
+        return View(viewName, responseViewModel);
+
+    }
 
 }
 

@@ -1,6 +1,9 @@
 using Microsoft.EntityFrameworkCore;
 using RedStore.Contracts;
 using RedStore.Database;
+using RedStore.Services.Abstract;
+using RedStore.Services.Concretes;
+
 namespace RedStore
 {
     public class Program
@@ -20,6 +23,7 @@ namespace RedStore
                 .AddRazorRuntimeCompilation();
 
             builder.Services
+                .AddScoped<IFileService,FileService>()
                 .AddDbContext<RedStoreDbContext>(o =>
                 {
                     o.UseNpgsql(DatabaseConstants.CONNECTION_STRING);
