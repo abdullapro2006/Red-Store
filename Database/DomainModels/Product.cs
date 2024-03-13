@@ -36,6 +36,12 @@ public class Product : IEntity
 
     public Category Category { get; set; }
 
+    [Column("imagename")]
+    public string ImageName { get; set; }
+
+    [Column("imagenameinfilesystem")]
+    public string ImageNameInFileSytem { get; set; }
+
 
     public List<ProductColor> ProductColors { get; set; }
     public List<ProductSize> ProductSizes { get; set; }

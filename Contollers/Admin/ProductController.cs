@@ -131,6 +131,15 @@ public class ProductController : Controller
                 _redStoreDbContext.ProductSizes.Add(productSize);
             }
 
+            string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(model.Image.FileName)}";
+
+            string absolutePath = @$"C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\wwwroot\custom-images\products\{uniqueFileName}";
+            using FileStream fileStream = new FileStream(absolutePath,FileMode.Create);
+            model.Image.CopyTo(fileStream);
+
+            product.ImageName = model.Image.FileName;
+            product.ImageNameInFileSytem = uniqueFileName;
+
             _redStoreDbContext.SaveChanges();
 
            
@@ -177,7 +186,8 @@ public class ProductController : Controller
             SelectedColorIds = product.ProductColors.Select(pc => pc.ColorId).ToArray(),
             Colors = _redStoreDbContext.Colors.ToList(),
             SelectedSizeIds = product.ProductSizes.Select(pc => pc.SizeId).ToArray(),
-            Sizes = _redStoreDbContext.Sizes.ToList()
+            Sizes = _redStoreDbContext.Sizes.ToList(),
+            ImageNameInFileSystem = product.ImageNameInFileSytem
         };
 
         return View("Views/Admin/Product/ProductEdit.cshtml", model);
@@ -266,6 +276,30 @@ public class ProductController : Controller
         });
 
         product.ProductSizes.AddRange(newProductSizes);
+
+        #endregion
+
+        #region Image
+
+        if(model.Image != null)
+        {
+            string oldImageAbsolutePath = @$"C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\wwwroot\custom-images\products\{product.ImageNameInFileSytem}";
+
+            System.IO.File.Delete(oldImageAbsolutePath);
+
+            string uniqueFileName = $"{Guid.NewGuid()}{Path.GetExtension(model.Image.FileName)}";
+
+            string newImageAbsolutePath = @$"C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\wwwroot\custom-images\products\{uniqueFileName}";
+            using FileStream fileStream = new FileStream(newImageAbsolutePath, FileMode.Create);
+            model.Image.CopyTo(fileStream);
+
+
+
+            product.ImageName = model.Image.FileName;
+            product.ImageNameInFileSytem = uniqueFileName;
+        }
+
+       
 
         #endregion
 

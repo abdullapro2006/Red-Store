@@ -52,8 +52,10 @@
                         @foreach (var product in Model)
                         {
                             <tr>
-                                <td>@* <img src="assets/images/users/user-3.jpg" alt="" class="rounded-circle thumb-xs me-1">  *@
-                                    @product.Name</td>
+                                <td>
+                                    <img src="~/custom-images/products/@product.ImageName" alt="" class="rounded-circle thumb-xl me-1"> 
+                                    @product.Name
+                                    </td>
                                 <td>@product.Category.Name</td>
                                 <td>@product.Price $</td>
                                 <td>@string.Join(',',product.ProductColors.Select(pc => pc.Color.Name))</td>

@@ -18,4 +18,6 @@ public abstract class BaseProductViewModel
     public List<Color> Colors { get; set; }
     public int[] SelectedSizeIds { get; set; }
     public List<Size> Sizes { get; set; }
+    public IFormFile Image { get; set; }
+    public string ImageNameInFileSystem { get; set; }
 }
