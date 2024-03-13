@@ -8,7 +8,7 @@ public class FileService : IFileService
 {
     public string Upload(IFormFile file, string path)
     {
-        var uniqueFileName = GetUniqueFileName();
+        var uniqueFileName = GetUniqueFileName(file.FileName);
         var uploadPath = Path.Combine(path, uniqueFileName);
         using FileStream fileStream = new FileStream(uploadPath, FileMode.Create);
         file.CopyTo(fileStream);
@@ -20,7 +20,7 @@ public class FileService : IFileService
 
     public string Upload(IFormFile file, UploadDirectory uploadDir)
     {
-        var uniqueFileName = GetUniqueFileName();
+        var uniqueFileName = GetUniqueFileName(file.FileName);
         var uploadPath = uploadDir.GetAbsolutePath(uniqueFileName);
         using FileStream fileStream = new FileStream(uploadPath, FileMode.Create);
         file.CopyTo(fileStream);
@@ -42,9 +42,9 @@ public class FileService : IFileService
     }
 
 
-    private string GetUniqueFileName()
+    private string GetUniqueFileName(string originalFileName)
     {
-        return Guid.NewGuid().ToString();
+        return $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
     }
 
 }

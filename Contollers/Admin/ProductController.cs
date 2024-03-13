@@ -5,6 +5,7 @@ using RedStore.Contracts;
 using RedStore.Database;
 using RedStore.Database.DomainModels;
 using RedStore.Services.Abstract;
+using RedStore.Services.Concretes;
 using RedStore.ViewModels;
 using RedStore.ViewModels.Product;
 using System.Reflection;
@@ -17,11 +18,13 @@ public class ProductController : Controller
     private readonly ILogger<ProductController> _logger;
     private readonly IFileService _fileService;
     public ProductController(RedStoreDbContext redStoreDbContext,
-        ILogger<ProductController> logger)
+        ILogger<ProductController> logger,
+        IFileService fileService)
     {
         _redStoreDbContext = redStoreDbContext;
 
         _logger = logger;
+        _fileService = fileService;
     }
 
 

@@ -27,7 +27,7 @@
         @foreach (var product in Model)
         {
             <div class="col-4">
-                <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@product.Id"><img src="@UploadDirectory.Products.GetUrl(product.ImageNameInFileSytem)></a>
+                <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@product.Id"><img src="@UploadDirectory.Products.GetUrl(product.ImageNameInFileSytem)"></a>
                 <a asp-controller="Product" asp-action="SingleProduct" asp-route-id="@product.Id"><h4>@product.Name</h4></a>
                 <div class="rating">
                     @for (int i = 0; i < product.Rating; i++)
