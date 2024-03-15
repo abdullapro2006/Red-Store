@@ -3821,12 +3821,16 @@
       "PackagePath": "staticwebassets\\client\\assets\\style.css"
     },
     {
-      "Id": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg",
-      "PackagePath": "staticwebassets\\custom-images\\products\\6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg"
+      "Id": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg",
+      "PackagePath": "staticwebassets\\custom-images\\products\\4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg"
     },
     {
       "Id": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\7ce5eb78-14f5-4a28-8025-691325dea57a.jpg",
       "PackagePath": "staticwebassets\\custom-images\\products\\7ce5eb78-14f5-4a28-8025-691325dea57a.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg",
+      "PackagePath": "staticwebassets\\custom-images\\products\\c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg"
     },
     {
       "Id": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\cf0a69b1-8d7b-46a8-85cd-134cfa77003f.jpg",
@@ -3835,6 +3839,10 @@
     {
       "Id": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\dc628a6e-4aaa-48fa-aa3f-524d3edaee0c.jpeg",
       "PackagePath": "staticwebassets\\custom-images\\products\\dc628a6e-4aaa-48fa-aa3f-524d3edaee0c.jpeg"
+    },
+    {
+      "Id": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg",
+      "PackagePath": "staticwebassets\\custom-images\\products\\f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg"
     },
     {
       "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.RedStore.Microsoft.AspNetCore.StaticWebAssets.props",

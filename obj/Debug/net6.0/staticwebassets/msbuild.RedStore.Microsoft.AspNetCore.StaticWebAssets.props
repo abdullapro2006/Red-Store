@@ -15280,12 +15280,12 @@
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\client\assets\style.css))</OriginalItemSpec>
     </StaticWebAsset>
-    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg))">
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg))">
       <SourceType>Package</SourceType>
       <SourceId>RedStore</SourceId>
       <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
       <BasePath>_content/RedStore</BasePath>
-      <RelativePath>custom-images/products/6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg</RelativePath>
+      <RelativePath>custom-images/products/4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg</RelativePath>
       <AssetKind>All</AssetKind>
       <AssetMode>All</AssetMode>
       <AssetRole>Primary</AssetRole>
@@ -15294,7 +15294,7 @@
       <AssetTraitValue></AssetTraitValue>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg))</OriginalItemSpec>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\7ce5eb78-14f5-4a28-8025-691325dea57a.jpg))">
       <SourceType>Package</SourceType>
@@ -15311,6 +15311,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\7ce5eb78-14f5-4a28-8025-691325dea57a.jpg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RedStore</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RedStore</BasePath>
+      <RelativePath>custom-images/products/c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg))</OriginalItemSpec>
     </StaticWebAsset>
     <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\cf0a69b1-8d7b-46a8-85cd-134cfa77003f.jpg))">
       <SourceType>Package</SourceType>
@@ -15343,6 +15359,22 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\dc628a6e-4aaa-48fa-aa3f-524d3edaee0c.jpeg))</OriginalItemSpec>
+    </StaticWebAsset>
+    <StaticWebAsset Include="$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg))">
+      <SourceType>Package</SourceType>
+      <SourceId>RedStore</SourceId>
+      <ContentRoot>$(MSBuildThisFileDirectory)..\staticwebassets\</ContentRoot>
+      <BasePath>_content/RedStore</BasePath>
+      <RelativePath>custom-images/products/f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg</RelativePath>
+      <AssetKind>All</AssetKind>
+      <AssetMode>All</AssetMode>
+      <AssetRole>Primary</AssetRole>
+      <RelatedAsset></RelatedAsset>
+      <AssetTraitName></AssetTraitName>
+      <AssetTraitValue></AssetTraitValue>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+      <OriginalItemSpec>$([System.IO.Path]::GetFullPath($(MSBuildThisFileDirectory)..\staticwebassets\custom-images\products\f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg))</OriginalItemSpec>
     </StaticWebAsset>
   </ItemGroup>
 </Project>

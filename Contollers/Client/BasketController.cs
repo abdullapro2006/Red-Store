@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using RedStore.Database;
 using RedStore.Services.Abstract;
+using RedStore.ViewModels.Product;
 
 namespace RedStore.Contollers.Client;
 
@@ -44,6 +45,92 @@ public class BasketController : Controller
         _redStoreDbContext.SaveChanges();
 
         return RedirectToAction("index", "home");
+    }
+
+
+    [HttpGet("remove-basket-product")]
+    public IActionResult RemoveBasketProduct(int basketProductId)
+    {
+        var basketProduct = _redStoreDbContext
+            .BasketProducts
+            .FirstOrDefault(bp => bp.UserId == _userService.GetCurrentLoggedUser().Id && bp.Id == basketProductId);
+
+        if(basketProduct == null)
+        {
+            return NotFound();
+        }
+
+        _redStoreDbContext.BasketProducts.Remove(basketProduct);
+
+
+        _redStoreDbContext.SaveChanges();
+
+        return RedirectToAction("cart", "basket");
+    }
+
+    [HttpGet("increase-basket-product")]
+    public IActionResult IncreaseBasketProduct(int basketProductId)
+    {
+        var basketProduct = _redStoreDbContext
+            .BasketProducts
+            .FirstOrDefault(bp => bp.UserId == _userService.GetCurrentLoggedUser().Id && bp.Id == basketProductId);
+
+        if (basketProduct == null)
+        {
+            return NotFound();
+        }
+
+        basketProduct.Quantity++;
+
+
+        _redStoreDbContext.SaveChanges();
+
+        return Json(new BasketQuantityUpdateResponseViewModel
+        {
+            Total = basketProduct.Quantity * basketProduct.Product.Price,
+            Quantity = basketProduct.Quantity
+        });
+
+
+    }
+
+
+    [HttpGet("decrease-basket-product")]
+    public IActionResult DecreaseBasketProduct(int basketProductId)
+    {
+        var basketProduct = _redStoreDbContext
+            .BasketProducts
+            .FirstOrDefault(bp => bp.UserId == _userService.GetCurrentLoggedUser().Id && bp.Id == basketProductId);
+
+        if (basketProduct == null)
+        {
+            return NotFound();
+        }
+
+        basketProduct.Quantity--;
+
+        if (basketProduct.Quantity <= 0)
+        {
+            _redStoreDbContext.BasketProducts.Remove(basketProduct);
+            _redStoreDbContext.SaveChanges();
+
+            return NoContent();
+        }
+
+
+
+           else
+           {
+            _redStoreDbContext.SaveChanges();
+
+            var updateResponseViewModel = new BasketQuantityUpdateResponseViewModel
+            {
+                Total = basketProduct.Quantity * basketProduct.Product.Price,
+                Quantity = basketProduct.Quantity
+            };
+
+             return Json(updateResponseViewModel);
+           }
     }
 
 

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "GnoPXQYSGfKB43OECQIpHlLUkfO9f7mDkJOexRY/SXc=",
+  "Hash": "zvi3iTe+G3Gi5vARstY2uVrJevhlO0PxUEIrzelzf0w=",
   "Source": "RedStore",
   "BasePath": "_content/RedStore",
   "Mode": "Default",
@@ -16252,12 +16252,12 @@
       "OriginalItemSpec": "wwwroot\\client\\assets\\style.css"
     },
     {
-      "Identity": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg",
+      "Identity": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg",
       "SourceId": "RedStore",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\",
       "BasePath": "_content/RedStore",
-      "RelativePath": "custom-images/products/6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg",
+      "RelativePath": "custom-images/products/4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -16266,7 +16266,7 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\custom-images\\products\\6cfeeb1f-c789-46f2-bd62-9aae68bec181.jpg"
+      "OriginalItemSpec": "wwwroot\\custom-images\\products\\4dd5681b-b79c-4973-bca9-01df65bbeab6.jpeg"
     },
     {
       "Identity": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\7ce5eb78-14f5-4a28-8025-691325dea57a.jpg",
@@ -16284,6 +16284,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\custom-images\\products\\7ce5eb78-14f5-4a28-8025-691325dea57a.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg",
+      "SourceId": "RedStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\",
+      "BasePath": "_content/RedStore",
+      "RelativePath": "custom-images/products/c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\custom-images\\products\\c7084a9a-2591-4c8b-928a-faeabbf97f08.jpg"
     },
     {
       "Identity": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\cf0a69b1-8d7b-46a8-85cd-134cfa77003f.jpg",
@@ -16318,6 +16335,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\custom-images\\products\\dc628a6e-4aaa-48fa-aa3f-524d3edaee0c.jpeg"
+    },
+    {
+      "Identity": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\custom-images\\products\\f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg",
+      "SourceId": "RedStore",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\wwwroot\\",
+      "BasePath": "_content/RedStore",
+      "RelativePath": "custom-images/products/f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\custom-images\\products\\f9fae29a-cb33-4d21-9326-676453aa6b44.jpeg"
     }
   ]
 }
