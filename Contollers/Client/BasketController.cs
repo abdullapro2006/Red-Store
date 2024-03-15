@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RedStore.Database;
 using RedStore.Services.Abstract;
@@ -7,6 +8,7 @@ using RedStore.ViewModels.Product;
 namespace RedStore.Contollers.Client;
 
 [Route("basket")]
+[Authorize]
 public class BasketController : Controller
 {
     private readonly IUserService _userService;

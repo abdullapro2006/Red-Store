@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
 using RedStore.Contracts;
@@ -12,6 +13,7 @@ using System.Reflection;
 
 namespace RedStore.Contollers.Admin;
 [Route("admin/products")]
+[Authorize]
 public class ProductController : Controller
 {
     private readonly RedStoreDbContext _redStoreDbContext;

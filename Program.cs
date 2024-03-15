@@ -24,7 +24,11 @@ namespace RedStore
 
             builder.Services
                 .AddAuthentication("Cookies")
-                .AddCookie("Cookies");
+                .AddCookie("Cookies", o =>
+                {
+                    o.LoginPath = "/auth/login";
+                    o.LogoutPath = "/home/index";
+                });
 
             builder.Services
                 .AddHttpContextAccessor()

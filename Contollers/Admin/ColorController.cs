@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RedStore.Database;
 
 namespace RedStore.Contollers.Admin;
 
 [Route("admin/colors")]
+[Authorize]
 public class ColorController : Controller
 {
     private readonly RedStoreDbContext _redStoreDbContext;

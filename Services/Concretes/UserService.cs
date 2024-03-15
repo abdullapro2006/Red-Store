@@ -46,4 +46,9 @@ public class UserService : IUserService
     {
         return user.Name + " " + user.LastName;
     }
+
+    public string GetCurrentUserFullName()
+    {
+        return GetFullName(CurrentUser);
+    }
 }
