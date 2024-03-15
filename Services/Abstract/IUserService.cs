@@ -4,5 +4,7 @@ namespace RedStore.Services.Abstract;
 
 public interface IUserService
 {
-    User GetCurrentLoggedUser();
+    User CurrentUser { get; }
+    string GetFullName(User user);
+    bool IsAuthenticateed {  get; }
 }

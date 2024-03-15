@@ -1,5 +1,9 @@
-﻿<div class="header">
+﻿
 
+@inject IUserService userService
+
+
+<div class="header">
 
     <div class="container">
         <div class="navbar">
@@ -8,11 +12,18 @@
             </div>
             <nav>
                 <ul id="MenuItems">
+
+                    @if (userService.IsAuthenticateed)
+                    {
+                        <li><a asp-controller="auth" asp-action="logout">Logout</a></li>
+                    }
+
+
                     <li><a href="index.html">Home</a></li>
                     <li><a href="products.html">Products</a></li>
                     <li><a href="">About</a></li>
                     <li><a href="">Contact</a></li>
-                    <li><a href="account.html">Account</a></li>
+                    <li><a asp-controller="auth" asp-action="login">Account</a></li>
                 </ul>
             </nav>
             <a asp-controller="Basket" asp-action="GetBasketProducts"><img src="~/client/assets/images/cart.png" width="30px" height="30px"></a>

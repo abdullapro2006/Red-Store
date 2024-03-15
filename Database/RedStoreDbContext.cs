@@ -103,8 +103,20 @@ public class RedStoreDbContext : DbContext
               {
                   Id = -1,
                   Name = "Admin",
-                  LastName = "Admin"
+                  LastName = "Admin",
+                  Email = "superadmin@gmail.com",
+                  Password = "123321am"
+              },
+              new User
+              {
+                  Id = -2,
+                  Name = "Moderator",
+                  LastName = "Moderator",
+                  Email = "moderator@gmail.com",
+                  Password = "123321"
               });
+
+
 
 
         base.OnModelCreating(modelBuilder);

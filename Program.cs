@@ -23,6 +23,11 @@ namespace RedStore
                 .AddRazorRuntimeCompilation();
 
             builder.Services
+                .AddAuthentication("Cookies")
+                .AddCookie("Cookies");
+
+            builder.Services
+                .AddHttpContextAccessor()
                 .AddSingleton<IFileService,FileService>()
                  .AddScoped<IUserService, UserService>()
                  .AddScoped<IProductService, ProductService>()
@@ -35,6 +40,10 @@ namespace RedStore
             var app = builder.Build();
 
             app.UseStaticFiles();
+
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.MapControllerRoute("default", "{controller=Home}/{action=Index}");
 

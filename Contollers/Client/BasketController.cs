@@ -39,7 +39,7 @@ public class BasketController : Controller
                 productId,
                 sizeId ?? _productService.GetDefaultSizeId(productId),
                 colorId ?? _productService.GetDefaultColorId(productId),
-                _userService.GetCurrentLoggedUser()
+                _userService.CurrentUser
             );
 
         _redStoreDbContext.SaveChanges();
@@ -53,7 +53,7 @@ public class BasketController : Controller
     {
         var basketProduct = _redStoreDbContext
             .BasketProducts
-            .FirstOrDefault(bp => bp.UserId == _userService.GetCurrentLoggedUser().Id && bp.Id == basketProductId);
+            .FirstOrDefault(bp => bp.UserId == _userService.CurrentUser.Id && bp.Id == basketProductId);
 
         if(basketProduct == null)
         {
@@ -73,7 +73,7 @@ public class BasketController : Controller
     {
         var basketProduct = _redStoreDbContext
             .BasketProducts
-            .FirstOrDefault(bp => bp.UserId == _userService.GetCurrentLoggedUser().Id && bp.Id == basketProductId);
+            .FirstOrDefault(bp => bp.UserId == _userService.CurrentUser.Id && bp.Id == basketProductId);
 
         if (basketProduct == null)
         {
@@ -100,7 +100,7 @@ public class BasketController : Controller
     {
         var basketProduct = _redStoreDbContext
             .BasketProducts
-            .FirstOrDefault(bp => bp.UserId == _userService.GetCurrentLoggedUser().Id && bp.Id == basketProductId);
+            .FirstOrDefault(bp => bp.UserId == _userService.CurrentUser.Id && bp.Id == basketProductId);
 
         if (basketProduct == null)
         {
@@ -138,7 +138,7 @@ public class BasketController : Controller
     public IActionResult GetBasketProducts()
     {
         var basketProducts = _redStoreDbContext.BasketProducts
-            .Where(bp => bp.UserId == _userService.GetCurrentLoggedUser().Id)
+            .Where(bp => bp.UserId == _userService.CurrentUser.Id)
             .Include(bp => bp.Product)
             .Include(bp => bp.Color)
             .Include(bp => bp.Size)
