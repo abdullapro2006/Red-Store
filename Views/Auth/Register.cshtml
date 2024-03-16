@@ -1,5 +1,5 @@
-﻿@model LoginViewModel
-
+﻿
+@model RegisterViewModel
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,19 +45,25 @@
                             <span onclick="login()">Login</span>
                             <span onclick="register()">Register</span>
                             <hr id="Indicator">
-                        </div>
-                        <form asp-controller="Auth" asp-action="Login" id="LoginForm">
-                            <input asp-for="Email" placeholder="Email">
-                            <span asp-validation-for="Email"></span>
-                            <input asp-for="Password" placeholder="Password">
+                        </div> 
+                        <form id="LoginForm">
+                            <input placeholder="Email">
+                            <span ></span>
+                            <input placeholder="Password">
                             <button type="submit" class="btn">Login</button>
                             <a href="">Forgot Password</a>
                         </form>
-                        <form id="RegForm">
-                            <input placeholder="Name">
-                            <input placeholder="LastName">
-                            <input type="email" placeholder="Email">
-                            <input type="password" placeholder="Password">
+                        <form asp-controller="Auth" asp-action="Register" id="RegForm">
+                            <input asp-for="Name" placeholder="Name">
+                            <span asp-validation-for="Name"></span>
+                            <input asp-for=LastName placeholder="LastName"> 
+                            <span asp-validation-for="LastName"></span>
+                            <input asp-for="Email" placeholder="Email">
+                            <span asp-validation-for="Email"></span>
+                            <input asp-for="Password" placeholder="Password">
+                            <span asp-validation-for="Password"></span>
+                            <input asp-for="ConfirmPassword" placeholder="ConfirmPassword">
+                            <span asp-validation-for="ConfirmPassword"></span>
                             <button type="submit" class="btn">Register</button>
                         </form>
                     </div>
@@ -149,7 +155,6 @@
     </script>
 
 
-  
 
 </body>
 </html>

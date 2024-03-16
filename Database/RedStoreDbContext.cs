@@ -105,7 +105,8 @@ public class RedStoreDbContext : DbContext
                   Name = "Admin",
                   LastName = "Admin",
                   Email = "superadmin@gmail.com",
-                  Password = "123321am"
+                  Password = "123321am",
+                  IsAdmin = true,
               },
               new User
               {
@@ -113,7 +114,8 @@ public class RedStoreDbContext : DbContext
                   Name = "Moderator",
                   LastName = "Moderator",
                   Email = "moderator@gmail.com",
-                  Password = "123321"
+                  Password = "123321",
+                  IsAdmin = true,
               });
 
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using RedStore.Database;
@@ -11,9 +12,10 @@ using RedStore.Database;
 namespace RedStore.Migrations
 {
     [DbContext(typeof(RedStoreDbContext))]
-    partial class RedStoreDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240316023633_User_Is_Admin")]
+    partial class User_Is_Admin
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -254,7 +256,7 @@ namespace RedStore.Migrations
                         {
                             Id = -1,
                             Email = "superadmin@gmail.com",
-                            IsAdmin = true,
+                            IsAdmin = false,
                             LastName = "Admin",
                             Name = "Admin",
                             Password = "123321am"
@@ -263,7 +265,7 @@ namespace RedStore.Migrations
                         {
                             Id = -2,
                             Email = "moderator@gmail.com",
-                            IsAdmin = true,
+                            IsAdmin = false,
                             LastName = "Moderator",
                             Name = "Moderator",
                             Password = "123321"

@@ -33,6 +33,12 @@
             {
                 <span>@userService.GetCurrentUserFullName()</span>
             }
+
+            @if(userService.IsAuthenticateed && userService.CurrentUser.IsAdmin)
+            {
+                <li><a asp-route="admin-products">Visit to Admin Panel</a></li>
+            }
+
             <img src="~/client/assets/images/menu.png" class="menu-icon" onclick="menutoggle()">
         </div>
         <div class="row">

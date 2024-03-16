@@ -5,7 +5,7 @@ using RedStore.Database;
 namespace RedStore.Contollers.Admin;
 
 [Route("admin/colors")]
-[Authorize]
+[Authorize(Roles = "admin")]
 public class ColorController : Controller
 {
     private readonly RedStoreDbContext _redStoreDbContext;

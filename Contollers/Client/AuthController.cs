@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using RedStore.Database;
+using RedStore.Database.DomainModels;
 using RedStore.ViewModels.Auth;
 using System.Security.Claims;
 
@@ -14,6 +15,8 @@ public class AuthController : Controller
     {
         _redStoreDbContext = redStoreDbContext;
     }
+
+    #region Login
 
     [HttpGet]
     public IActionResult Login()
@@ -37,6 +40,12 @@ public class AuthController : Controller
         var claims = new List<Claim>(){
           new Claim("Id", user.Id.ToString())
         };
+
+        if (user.IsAdmin)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, "admin"));
+        }
+
         var claimsIdentity = new ClaimsIdentity(claims, "Cookies");
         var claimsPrincipal = new ClaimsPrincipal(claimsIdentity);
 
@@ -46,10 +55,57 @@ public class AuthController : Controller
         return RedirectToAction("index","home");
     }
 
-      public async Task<IActionResult> Logout()
-      {
+
+
+    #endregion
+
+    #region Register
+
+    [HttpGet]
+    public IActionResult Register()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Register(RegisterViewModel model)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View();
+        }
+
+        if(_redStoreDbContext.Users.Any(u => u.Email == model.Email))
+        {
+            ModelState.AddModelError("Email", "This email already taken");
+            return View();
+        }
+
+
+        var user = new User
+        {
+            Name = model.Email,
+            LastName = model.LastName,
+            Email = model.Email,
+            Password = model.Password
+        };
+
+        _redStoreDbContext.Users.Add(user);
+        _redStoreDbContext.SaveChanges();
+        return RedirectToAction("index", "home");
+    }
+
+
+
+    #endregion
+
+    #region Logout
+    [HttpGet]
+    public async Task<IActionResult> Logout()
+    {
         await HttpContext.SignOutAsync("Cookies");
 
         return RedirectToAction(nameof(Login));
-      }
+    }
+    #endregion
 }

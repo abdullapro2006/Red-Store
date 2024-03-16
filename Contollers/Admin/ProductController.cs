@@ -13,7 +13,7 @@ using System.Reflection;
 
 namespace RedStore.Contollers.Admin;
 [Route("admin/products")]
-[Authorize]
+[Authorize(Roles = "admin")]
 public class ProductController : Controller
 {
     private readonly RedStoreDbContext _redStoreDbContext;
@@ -31,7 +31,7 @@ public class ProductController : Controller
 
 
     #region Products
-    [HttpGet]
+    [HttpGet(Name = "admin-products")]
     public IActionResult Products()
     {
         var products = _redStoreDbContext.Products

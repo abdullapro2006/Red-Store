@@ -5,7 +5,7 @@ using RedStore.Database;
 namespace RedStore.Contollers.Admin;
 
 [Route("admin/sizes")]
-[Authorize]
+[Authorize(Roles = "admin")]
 public class SizeController : Controller
 {
     private readonly RedStoreDbContext _redStoreDbContext;
