@@ -19,7 +19,7 @@ public class UserController : Controller
     #region Users
 
     [HttpGet]
-    public IActionResult Index()
+    public IActionResult Users()
     {
         var users = _redStoreDbContext.Users
             .OrderBy(u => u.Name)
