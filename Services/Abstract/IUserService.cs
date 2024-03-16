@@ -8,4 +8,5 @@ public interface IUserService
     string GetFullName(User user);
     bool IsAuthenticateed {  get; }
     string GetCurrentUserFullName();
+    bool IsUserSeeded(User user);
 }

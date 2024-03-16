@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "6fSfdOATawO4bhoQaBIVHC4xg6csWIUEGn5EC0ZZ4g+zXPw8jqN3B+oTbj6W16IjicOpjAZFJgUScjKhdZmodQ==",
+  "dgSpecHash": "lxSSNenLExBC7oVkHYqyaOQHD48omTr8D8MtTQHjY3BSiDbnQXBj/6Gqn0ZN7B+B1YwMGWDFzN49Hrm60l2dWA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Abdullah Manafli\\Documents\\RedStore\\RedStore\\RedStore.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\bcrypt.net-next\\4.0.3\\bcrypt.net-next.4.0.3.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.extensions\\6.0.27\\microsoft.aspnetcore.mvc.razor.extensions.6.0.27.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\microsoft.aspnetcore.mvc.razor.runtimecompilation\\6.0.27\\microsoft.aspnetcore.mvc.razor.runtimecompilation.6.0.27.nupkg.sha512",
@@ -31,6 +32,7 @@
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\npgsql\\6.0.10\\npgsql.6.0.10.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\npgsql.entityframeworkcore.postgresql\\6.0.22\\npgsql.entityframeworkcore.postgresql.6.0.22.nupkg.sha512",
+    "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\portable.bouncycastle\\1.9.0\\portable.bouncycastle.1.9.0.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\system.buffers\\4.5.1\\system.buffers.4.5.1.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Abdullah Manafli\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.1\\system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",

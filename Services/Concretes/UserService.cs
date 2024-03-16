@@ -51,4 +51,9 @@ public class UserService : IUserService
     {
         return GetFullName(CurrentUser);
     }
+
+    public bool IsUserSeeded(User user)
+    {
+        return user.Id < 0;
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Org.BouncyCastle.Crypto.Generators;
 using RedStore.Database;
 using RedStore.Database.DomainModels;
 using RedStore.ViewModels.Auth;
@@ -28,11 +29,19 @@ public class AuthController : Controller
     public async Task<IActionResult> Login(LoginViewModel model)
     {
         var user = _redStoreDbContext.Users
-            .FirstOrDefault(u => u.Email == model.Email && u.Password == model.Password);
+            .FirstOrDefault(u => u.Email == model.Email);
 
         if (user == null)
         {
             ModelState.AddModelError("Email", "Password or email is wrong");
+            return View();
+        }
+
+
+        if (!BCrypt.Net.BCrypt.Verify(model.Password, user.Password))
+        {
+            ModelState.AddModelError("Email", "Password or email is wrong");
+
             return View();
         }
 
@@ -84,10 +93,10 @@ public class AuthController : Controller
 
         var user = new User
         {
-            Name = model.Email,
+            Name = model.Name,
             LastName = model.LastName,
             Email = model.Email,
-            Password = model.Password
+            Password = BCrypt.Net.BCrypt.HashPassword(model.Password)
         };
 
         _redStoreDbContext.Users.Add(user);

@@ -360,3 +360,6 @@ C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\bin\Debug\net6.0\Microsoft
 C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
 C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\bin\Debug\net6.0\Microsoft.Extensions.DependencyInjection.dll
 C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\bin\Debug\net6.0\Npgsql.EntityFrameworkCore.PostgreSQL.dll
+C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\bin\Debug\net6.0\BCrypt.Net-Next.dll
+C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\bin\Debug\net6.0\libman.json
+C:\Users\Abdullah Manafli\Documents\RedStore\RedStore\bin\Debug\net6.0\BouncyCastle.Crypto.dll
